@@ -11,6 +11,6 @@
   "schedulers_enabled": false,
   "java_opts": "-Xms128m -Xmx1500m -XX:+UseG1GC",
   "env": {
-    "REDIRECT_URL": "https://hjelpemidler.intern.dev.nav.no"
+    "UNAUTHORIZED_REDIRECT_URL": "https://hjelpemidler.intern.dev.nav.no/imb/request-api/oauth2/login"
   }
 }

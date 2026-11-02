@@ -7,7 +7,7 @@ micronaut:
         signatures:
           jwks:
             default:
-              url: ${JWKS_URL:`http://localhost:8181/default/jwks`}
+              url: ${IDPORTEN_JWKS_URI:`http://localhost:8181/default/jwks`}
       bearer:
         enabled: true
     redirect:
