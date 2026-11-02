@@ -1,0 +1,101 @@
+micronaut:
+  security:
+    token:
+      jwt:
+        claims-validators:
+          acr: ${JWT_ACR:`Level4`}
+        signatures:
+          jwks:
+            default:
+              url: ${JWKS_URL:`http://localhost:8181/default/jwks`}
+      bearer:
+        enabled: true
+    redirect:
+      unauthorized:
+        url: ${UNAUTHORIZED_REDIRECT_URL:`http://localhost:8181/default/debugger`}
+        enabled: true
+    name: hm-imb-request-api
+    thread-selection: auto
+  executors:
+    consumer:
+      type: fixed
+      nThreads: 1
+  http:
+    client:
+      max-content-length: 100833718
+      read-timeout: "10m"
+      event-loop-group: http
+  netty:
+    event-loops:
+      http:
+        num-threads: 25
+        prefer-native-transport: true
+  router:
+    static-resources:
+      swagger:
+        paths: classpath:META-INF/swagger
+        mapping: /swagger/**
+        enabled: ${SWAGGER_ENABLED:true}
+      swagger-ui:
+        paths: classpath:META-INF/swagger/views/swagger-ui
+        mapping: /swagger-ui/**
+        enabled: ${SWAGGER_ENABLED:true}
+  server:
+    max-request-size: 100833718
+    port: ${SERVER_PORT:8080}
+    context-path: /imb/request-api
+  data:
+    pageable:
+      max-page-size: 10000
+  metrics:
+    enabled: true
+    binders:
+      uptime:
+        enabled: true
+      processor:
+        enabled: true
+      jvm:
+        enabled: true
+      web:
+        enabled: true
+      logback:
+        enabled: true
+      jdbc:
+        enabled: true
+      kafka:
+        enabled: true
+    export:
+      prometheus:
+        enabled: true
+        step: PT1M
+        descriptions: false
+endpoints:
+  metrics:
+    enabled: true
+  routes:
+    enabled: true
+    sensitive: false
+  prometheus:
+    sensitive: false
+    enabled: true
+  all:
+    path: "/internal"
+
+#datasources:
+#  default:
+#    url: ${DB_JDBC_URL:`jdbc:tc:postgresql:18:///requestapi?TC_TMPFS=/testtmpfs:rw&TC_REUSABLE=true`}
+#    driverClassName: ${DB_DRIVER:org.testcontainers.jdbc.ContainerDatabaseDriver}
+#    username: ${DB_USERNAME:requestapi}
+#    password: ${DB_PASSWORD:requestapi}
+#    maximum-pool-size: 8
+#    minimum-idle: 0
+#    pool-name: default
+#
+#flyway:
+#  datasources:
+#    default:
+#      locations: classpath:db
+
+schedulers:
+  enabled: ${SCHEDULERS_ENABLED:false}
+

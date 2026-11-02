@@ -1,0 +1,7 @@
+FROM eclipse-temurin:25-jre-alpine
+WORKDIR /app
+ENV TZ="Europe/Oslo"
+EXPOSE 8080
+COPY build/libs/hm-imb-request-api-all.jar ./app.jar
+USER 1000
+CMD ["java", "-jar", "app.jar"]

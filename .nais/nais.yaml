@@ -1,0 +1,41 @@
+apiVersion: 'nais.io/v1alpha1'
+kind: 'Application'
+metadata:
+  name: hm-imb-request-api
+  namespace: teamdigihot
+  labels:
+    team: teamdigihot
+spec:
+  image: {{image}}
+  port: 8080
+  replicas:
+    min: {{ min_replicas }}
+    max: {{ max_replicas }}
+    cpuThresholdPercentage: 80
+  resources:
+    limits:
+      memory: 4096Mi
+    requests:
+      cpu: 200m
+      memory: 256Mi
+  prometheus:
+    enabled: true
+    path: /imb/request-api/internal/prometheus
+  liveness:
+    path: /imb/request-api/internal/alive
+    initialDelay: 5
+  readiness:
+    path: /imb/request-api/internal/ready
+    initialDelay: 5
+  ingresses:
+  {{#each ingress as |url|}}
+     - {{url}}
+  {{/each}}
+  idporten:
+    enabled: true
+    sidecar:
+      enabled: true
+      level: Level4
+  env:
+    - name: REDIRECT_URL
+      value: "{{ redirect_url }}"
