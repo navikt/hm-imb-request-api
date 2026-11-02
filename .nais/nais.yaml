@@ -37,5 +37,5 @@ spec:
       enabled: true
       level: Level4
   env:
-    - name: REDIRECT_URL
-      value: "{{ redirect_url }}"
+    - name: UNAUTHORIZED_REDIRECT_URL
+      value: "{{ unauthorized_redirect_url }}"
