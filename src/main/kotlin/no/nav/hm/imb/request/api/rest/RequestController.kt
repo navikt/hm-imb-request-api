@@ -13,7 +13,7 @@ class RequestController {
 
     @Get("/ping")
     fun ping(authentication: Authentication): String {
-        LOG.info("Ping request ${authentication.name}  with roles ${authentication.roles}")
+        LOG.info("Ping request {}  with roles {} and attributes {}", authentication.name, authentication.roles, authentication.attributes)
         return "pong"
     }
 
