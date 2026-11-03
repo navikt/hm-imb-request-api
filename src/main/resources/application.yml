@@ -3,7 +3,7 @@ micronaut:
     token:
       jwt:
         claims-validators:
-          acr: ${JWT_ACR:`Level4`}
+          acr: ${JWT_ACR:`idporten-loa-high`}
         signatures:
           jwks:
             default:
