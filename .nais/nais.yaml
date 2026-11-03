@@ -37,5 +37,11 @@ spec:
       enabled: true
       level: Level4
   env:
-    - name: UNAUTHORIZED_REDIRECT_URL
-      value: "{{ unauthorized_redirect_url }}"
+    - name: SWAGGER_ENABLED
+      value: "{{ swagger_enabled }}"
+    - name: SCHEDULERS_ENABLED
+      value: "{{ schedulers_enabled }}"
+  {{#each env}}
+    - name: {{@key }}
+      value: "{{this}}"
+  {{/each}}
