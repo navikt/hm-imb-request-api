@@ -13,7 +13,7 @@ class IdPortenClaimValidator<T>(@param:Value("\${micronaut.security.token.jwt.cl
     GenericJwtClaimsValidator<T> {
 
     override fun validate(claims: Claims, request: T?): Boolean {
-        LOG.info("Validating JWT token for acr claim {}", acr)
+        LOG.info("Validating JWT token for acr claim {}", claims[ACR_CLAIM])
         return claims[ACR_CLAIM] == acr
     }
 
